@@ -1,0 +1,134 @@
+# ======================================================================
+#  LIENS, COMMANDES PERSONNALISÉES, ANNONCES ET ACCUEIL
+#  Format MiniMessage : https://docs.advntr.dev/minimessage/format.html
+#  Après modification, en jeu : /monserveur reload
+# ======================================================================
+
+# ----------------------------------------------------------------------
+#  VARIABLES : à changer en premier !
+#  On les réutilise partout avec {nom}, par exemple {discord}.
+#  Tu peux en ajouter autant que tu veux.
+# ----------------------------------------------------------------------
+variables:
+  server-name: "Mon Serveur"
+  discord: "https://discord.gg/TON-INVITATION"
+  youtube: "https://www.youtube.com/@TaChaine"
+  store: "https://ton-site.fr/boutique"
+  website: "https://ton-site.fr"
+
+# Ligne cliquable utilisée par les PNJ de type LINK. {url} = valeur de la variable
+link-format: "<click:open_url:'{url}'><hover:show_text:'<gray>{url}'><aqua><underlined>{label}</underlined></hover></click>"
+
+# ----------------------------------------------------------------------
+#  COMMANDES PERSONNALISÉES
+#  Chaque entrée devient une commande : /discord, /youtube, /rules...
+#  aliases     : autres noms possibles pour la commande
+#  permission  : optionnelle (vide = tout le monde)
+#  lines       : les lignes affichées (une ligne vide "" = un saut de ligne)
+#  Placeholders : {player} {online} {max} + toutes tes variables
+# ----------------------------------------------------------------------
+commands:
+  discord:
+    aliases: [dc]
+    description: "Lien du serveur Discord"
+    lines:
+      - ""
+      - "<blue><bold>DISCORD"
+      - "<gray>Rejoins la communauté, {player} !"
+      - "{link:discord|Clique ici pour rejoindre}"
+      - ""
+  youtube:
+    aliases: [yt]
+    description: "Lien de la chaîne YouTube"
+    lines:
+      - ""
+      - "<red><bold>YOUTUBE"
+      - "<gray>Abonne-toi pour ne rien rater !"
+      - "{link:youtube|Clique ici pour t'abonner}"
+      - ""
+  store:
+    aliases: [don, soutenir]
+    description: "Boutique web du serveur"
+    lines:
+      - ""
+      - "<gold><bold>BOUTIQUE"
+      - "<gray>Soutiens le serveur et obtiens des avantages :"
+      - "{link:store|Clique ici pour ouvrir la boutique}"
+      - ""
+  website:
+    aliases: [site]
+    description: "Site web du serveur"
+    lines:
+      - ""
+      - "<green><bold>SITE WEB"
+      - "{link:website|Clique ici pour ouvrir le site}"
+      - ""
+  links:
+    aliases: [liens]
+    description: "Tous les liens du serveur"
+    lines:
+      - ""
+      - "<gold><bold>LIENS UTILES"
+      - "<blue>Discord <dark_gray>» {link:discord|Rejoindre}"
+      - "<red>YouTube <dark_gray>» {link:youtube|S'abonner}"
+      - "<gold>Boutique <dark_gray>» {link:store|Ouvrir}"
+      - "<green>Site <dark_gray>» {link:website|Ouvrir}"
+      - ""
+  rules:
+    aliases: [regles, règles]
+    description: "Règlement du serveur"
+    lines:
+      - ""
+      - "<gold><bold>RÈGLEMENT de {server-name}"
+      - "<yellow>1. <gray>Respecte tous les joueurs."
+      - "<yellow>2. <gray>Pas de triche, de bug abusé ni de grief."
+      - "<yellow>3. <gray>Pas de spam ni de publicité."
+      - "<yellow>4. <gray>Écoute le staff."
+      - ""
+  aide:
+    aliases: [help-serveur, guide]
+    description: "Aide et commandes du serveur"
+    lines:
+      - ""
+      - "<gold><bold>AIDE - {server-name}"
+      - "<yellow>/menu <gray>- menu principal (ou clic droit sur l'étoile)"
+      - "<yellow>/shop <gray>- boutique en jeu"
+      - "<yellow>/quests <gray>- quêtes du jour"
+      - "<yellow>/sethome <gray>et <yellow>/home <gray>- tes points de téléportation"
+      - "<yellow>/spawn <gray>- retour au spawn"
+      - "<yellow>/balance <gray>et <yellow>/pay <gray>- ton argent"
+      - "<yellow>/tag <gray>- personnalise ton pseudo"
+      - "<yellow>/discord <gray>/ <yellow>/youtube <gray>/ <yellow>/store <gray>- nos liens"
+      - ""
+
+# ----------------------------------------------------------------------
+#  ANNONCES AUTOMATIQUES (affichées dans le chat à tour de rôle)
+# ----------------------------------------------------------------------
+announcements:
+  enabled: true
+  interval-seconds: 300      # toutes les 5 minutes
+  min-players: 1             # pas d'annonce si personne n'est connecté
+  prefix: "<dark_gray>[<gold>Annonce<dark_gray>] <gray>"
+  messages:
+    - "Rejoins notre Discord : {link:discord|clique ici}"
+    - "Abonne-toi à la chaîne YouTube : {link:youtube|clique ici}"
+    - "Tape <yellow>/menu <gray>pour ouvrir le menu du serveur !"
+    - "Soutiens le serveur sur la boutique : {link:store|clique ici}"
+    - "Des quêtes quotidiennes t'attendent : <yellow>/quests"
+
+# ----------------------------------------------------------------------
+#  MESSAGE D'ACCUEIL (à chaque connexion)
+# ----------------------------------------------------------------------
+welcome:
+  enabled: true
+  delay-ticks: 30            # 20 ticks = 1 seconde
+  sound: true
+  title: "<gold><bold>{server-name}"
+  subtitle: "<gray>Bienvenue, <white>{player}<gray> !"
+  lines:
+    - ""
+    - "<gold><bold>Bienvenue sur {server-name} !"
+    - "<gray>Discord : {link:discord|clique ici}"
+    - "<gray>YouTube : {link:youtube|clique ici}"
+    - "<gray>Tape <yellow>/menu <gray>pour commencer."
+    - ""

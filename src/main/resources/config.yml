@@ -1,0 +1,425 @@
+# ======================================================================
+#  MonServeur - configuration
+#  Tous les textes utilisent le format MiniMessage :
+#  https://docs.advntr.dev/minimessage/format.html
+#  Après modification, tape en jeu : /monserveur reload
+# ======================================================================
+
+# ----------------------------------------------------------------------
+#  GRADES  (attribués avec /rank set <joueur> <grade>)
+#  weight : plus il est grand, plus le joueur est haut dans la liste TAB
+#  max-homes : nombre de homes de base
+#  sell-multiplier : bonus sur les ventes de la boutique
+# ----------------------------------------------------------------------
+default-rank: joueur
+
+ranks:
+  joueur:
+    display: "Joueur"
+    prefix: "<gray>[Joueur] "
+    name-color: "<gray>"
+    chat-color: "<white>"
+    team-color: "gray"
+    weight: 10
+    max-homes: 2
+    sell-multiplier: 1.0
+  vip:
+    display: "VIP"
+    prefix: "<green>[VIP] "
+    name-color: "<green>"
+    chat-color: "<white>"
+    team-color: "green"
+    weight: 20
+    max-homes: 4
+    sell-multiplier: 1.1
+  mvp:
+    display: "MVP"
+    prefix: "<aqua>[MVP] "
+    name-color: "<aqua>"
+    chat-color: "<white>"
+    team-color: "aqua"
+    weight: 30
+    max-homes: 6
+    sell-multiplier: 1.25
+  modo:
+    display: "Modérateur"
+    prefix: "<blue>[Modo] "
+    name-color: "<blue>"
+    chat-color: "<white>"
+    team-color: "blue"
+    weight: 50
+    max-homes: 8
+    sell-multiplier: 1.25
+  admin:
+    display: "Administrateur"
+    prefix: "<red>[Admin] "
+    name-color: "<red>"
+    chat-color: "<white>"
+    team-color: "red"
+    weight: 100
+    max-homes: 12
+    sell-multiplier: 1.5
+
+# ----------------------------------------------------------------------
+#  TAGS cosmétiques (affichés dans le chat après le pseudo, menu /tag)
+#  price : 0 = gratuit | permission : optionnelle (réserve le tag)
+# ----------------------------------------------------------------------
+tags:
+  etoile:
+    display: "<yellow>★"
+    price: 500
+  coeur:
+    display: "<red>❤"
+    price: 750
+  eclair:
+    display: "<gold>⚡"
+    price: 1000
+  couronne:
+    display: "<gold>♛"
+    price: 5000
+  fondateur:
+    display: "<light_purple>[Fondateur]"
+    price: 0
+    permission: "monserveur.tag.fondateur"
+
+# ----------------------------------------------------------------------
+#  CHAT & TAB
+# ----------------------------------------------------------------------
+chat:
+  # Placeholders : <level> <prefix> <namecolor> <name> <tag> <chatcolor> <message>
+  format: "<level><prefix><namecolor><name><tag><dark_gray> » <chatcolor><message>"
+  show-level: true
+  level-format: "<dark_gray>[<green>{level}<dark_gray>] "
+
+tab:
+  enabled: true
+  update-ticks: 100
+  # Placeholders : {server-name} {online} {max} {balance} {level} {rank} {player} {ping}
+  header:
+    - "<gold><bold>{server-name}"
+    - "<gray>Joueurs en ligne : <white>{online}<gray>/<white>{max}"
+  footer:
+    - "<gray>Grade : <white>{rank} <dark_gray>| <gray>Niveau : <green>{level}"
+    - "<gray>Argent : <gold>{balance} <dark_gray>| <gray>Ping : <white>{ping}ms"
+
+# ----------------------------------------------------------------------
+#  ÉCONOMIE
+# ----------------------------------------------------------------------
+economy:
+  starting-balance: 100
+  currency-symbol: "$"
+
+# ----------------------------------------------------------------------
+#  NIVEAUX & XP
+#  XP nécessaire pour passer du niveau N au suivant : xp-base * N ^ xp-exponent
+# ----------------------------------------------------------------------
+levels:
+  max-level: 50
+  xp-base: 100
+  xp-exponent: 1.5
+  money-per-level: 25        # récompense = ce montant x nouveau niveau
+  broadcast-every: 10        # annonce globale tous les X niveaux (0 = jamais)
+  xp:
+    mob-default: 5
+    fish: 10
+    # Seuls les blocs listés ici donnent de l'XP
+    blocks:
+      STONE: 1
+      DEEPSLATE: 1
+      COBBLESTONE: 1
+      DIRT: 0
+      COAL_ORE: 3
+      DEEPSLATE_COAL_ORE: 3
+      COPPER_ORE: 3
+      IRON_ORE: 5
+      DEEPSLATE_IRON_ORE: 5
+      GOLD_ORE: 8
+      DEEPSLATE_GOLD_ORE: 8
+      REDSTONE_ORE: 5
+      LAPIS_ORE: 6
+      DIAMOND_ORE: 20
+      DEEPSLATE_DIAMOND_ORE: 20
+      EMERALD_ORE: 25
+      ANCIENT_DEBRIS: 40
+      OAK_LOG: 2
+      BIRCH_LOG: 2
+      SPRUCE_LOG: 2
+      JUNGLE_LOG: 2
+      ACACIA_LOG: 2
+      DARK_OAK_LOG: 2
+    mobs:
+      ZOMBIE: 5
+      SKELETON: 6
+      CREEPER: 8
+      SPIDER: 5
+      ENDERMAN: 15
+      WITCH: 20
+      BLAZE: 20
+      WITHER_SKELETON: 30
+      ELDER_GUARDIAN: 150
+      WARDEN: 300
+      ENDER_DRAGON: 500
+      WITHER: 500
+
+# ----------------------------------------------------------------------
+#  QUÊTES QUOTIDIENNES (remises à zéro chaque jour)
+#  type : BREAK_BLOCK | KILL_MOB | FISH
+#  target : ANY ou une liste séparée par des virgules (STONE,COBBLESTONE)
+# ----------------------------------------------------------------------
+quests:
+  mineur:
+    name: "<gold>Mineur du jour"
+    description: "Casse 100 blocs de pierre."
+    type: BREAK_BLOCK
+    target: "STONE,COBBLESTONE,DEEPSLATE"
+    amount: 100
+    reward:
+      money: 150
+      xp: 40
+  bucheron:
+    name: "<green>Bûcheron"
+    description: "Coupe 40 bûches."
+    type: BREAK_BLOCK
+    target: "OAK_LOG,BIRCH_LOG,SPRUCE_LOG,JUNGLE_LOG,ACACIA_LOG,DARK_OAK_LOG"
+    amount: 40
+    reward:
+      money: 120
+      xp: 30
+  chasseur:
+    name: "<red>Chasseur"
+    description: "Tue 20 monstres."
+    type: KILL_MOB
+    target: "ZOMBIE,SKELETON,CREEPER,SPIDER,ENDERMAN,WITCH"
+    amount: 20
+    reward:
+      money: 200
+      xp: 60
+  pecheur:
+    name: "<aqua>Pêcheur"
+    description: "Pêche 10 poissons."
+    type: FISH
+    target: "ANY"
+    amount: 10
+    reward:
+      money: 100
+      xp: 25
+
+# ----------------------------------------------------------------------
+#  BOUTIQUE  (max 45 articles par catégorie)
+#  buy : prix d'achat (0 = non achetable) | sell : prix de vente (0 = non vendable)
+# ----------------------------------------------------------------------
+shop:
+  categories:
+    blocs:
+      name: "<green>Blocs"
+      icon: GRASS_BLOCK
+      items:
+        STONE: {buy: 10, sell: 2}
+        COBBLESTONE: {buy: 6, sell: 1}
+        DIRT: {buy: 4, sell: 1}
+        OAK_LOG: {buy: 12, sell: 3}
+        SPRUCE_LOG: {buy: 12, sell: 3}
+        BIRCH_LOG: {buy: 12, sell: 3}
+        SAND: {buy: 8, sell: 2}
+        GLASS: {buy: 12, sell: 3}
+        BRICKS: {buy: 40, sell: 8}
+    minerais:
+      name: "<gold>Minerais"
+      icon: DIAMOND
+      items:
+        COAL: {buy: 15, sell: 5}
+        COPPER_INGOT: {buy: 20, sell: 6}
+        IRON_INGOT: {buy: 40, sell: 12}
+        GOLD_INGOT: {buy: 80, sell: 25}
+        REDSTONE: {buy: 20, sell: 6}
+        LAPIS_LAZULI: {buy: 25, sell: 8}
+        DIAMOND: {buy: 400, sell: 120}
+        EMERALD: {buy: 500, sell: 150}
+        NETHERITE_INGOT: {buy: 0, sell: 1500}
+    nourriture:
+      name: "<red>Nourriture"
+      icon: COOKED_BEEF
+      items:
+        BREAD: {buy: 10, sell: 3}
+        COOKED_BEEF: {buy: 20, sell: 6}
+        COOKED_PORKCHOP: {buy: 20, sell: 6}
+        COOKED_CHICKEN: {buy: 15, sell: 4}
+        GOLDEN_CARROT: {buy: 40, sell: 12}
+        APPLE: {buy: 8, sell: 2}
+        WHEAT: {buy: 0, sell: 2}
+        CARROT: {buy: 0, sell: 2}
+        POTATO: {buy: 0, sell: 2}
+    outils:
+      name: "<aqua>Outils"
+      icon: IRON_PICKAXE
+      items:
+        IRON_PICKAXE: {buy: 150, sell: 30}
+        IRON_SWORD: {buy: 120, sell: 25}
+        DIAMOND_PICKAXE: {buy: 1200, sell: 250}
+        DIAMOND_SWORD: {buy: 1000, sell: 200}
+        BOW: {buy: 100, sell: 20}
+        ARROW: {buy: 5, sell: 1}
+        SHIELD: {buy: 80, sell: 15}
+
+# ----------------------------------------------------------------------
+#  HOMES / TÉLÉPORTATION / SPAWN
+# ----------------------------------------------------------------------
+homes:
+  extra-home-every-levels: 10   # +1 home tous les X niveaux (0 = désactivé)
+
+teleport:
+  warmup-seconds: 3             # délai avant téléportation (annulé si tu bouges)
+  request-timeout-seconds: 60   # délai avant qu'une demande /tpa expire toute seule
+
+# ----------------------------------------------------------------------
+#  HÔTEL DES VENTES (/ah)
+# ----------------------------------------------------------------------
+auction:
+  listing-duration-hours: 72    # durée avant retour automatique si l'objet n'est pas vendu
+  max-active-listings: 3        # annonces actives max par joueur
+  fee-percent: 5                # commission prélevée sur le prix de vente
+  min-price: 10
+  max-price: 1000000
+
+spawn:
+  teleport-on-join: false       # true pour un serveur lobby
+
+# ----------------------------------------------------------------------
+#  MODE LOBBY : protège le monde (pas de casse/pose, pas de dégâts, pas de faim)
+#  Les joueurs avec la permission monserveur.lobby.bypass ne sont pas concernés.
+# ----------------------------------------------------------------------
+lobby:
+  enabled: false
+  lock-inventory: true
+
+# ----------------------------------------------------------------------
+#  OBJET MENU (clic droit = ouvre /menu)
+# ----------------------------------------------------------------------
+menu-item:
+  enabled: true
+  material: NETHER_STAR
+  name: "<gold><bold>Menu principal"
+  slot: 8
+
+# ----------------------------------------------------------------------
+#  CONNEXION  (chaîne vide "" pour désactiver un message)
+# ----------------------------------------------------------------------
+join:
+  first-join-broadcast: true
+  join-message: "<dark_gray>[<green>+<dark_gray>] <gray><player>"
+  quit-message: "<dark_gray>[<red>-<dark_gray>] <gray><player>"
+
+# ----------------------------------------------------------------------
+#  MESSAGES  (placeholders entre < > : <player> <amount> ...)
+# ----------------------------------------------------------------------
+messages:
+  prefix: "<dark_gray>[<gold>MonServeur<dark_gray>] <gray>"
+  no-permission: "<red>Tu n'as pas la permission."
+  player-only: "<red>Cette commande est réservée aux joueurs."
+  player-not-found: "<red>Joueur introuvable : <white><player>"
+  invalid-amount: "<red>Montant invalide."
+  usage: "<red>Utilisation : <white><usage>"
+  reloaded: "<green>Configuration rechargée."
+  first-join: "<gold><player> <gray>rejoint le serveur pour la première fois ! Bienvenue !"
+
+  balance: "Ton solde : <gold><amount>"
+  balance-other: "Solde de <white><player><gray> : <gold><amount>"
+  not-enough-money: "<red>Fonds insuffisants (il faut <gold><amount><red>)."
+  pay-self: "<red>Tu ne peux pas te payer toi-même."
+  pay-sent: "Tu as envoyé <gold><amount><gray> à <white><player><gray>."
+  pay-received: "Tu as reçu <gold><amount><gray> de <white><player><gray>."
+  eco-done: "Solde de <white><player><gray> : <gold><amount>"
+  baltop-header: "<gold><bold>Classement des richesses"
+  baltop-line: "<yellow><position>. <white><player> <dark_gray>- <gold><amount>"
+
+  shop-bought: "<green>Achat : <white><amount>x <item><gray> pour <gold><price>"
+  shop-sold: "<green>Vente : <white><amount>x <item><gray> pour <gold><price>"
+  shop-not-buyable: "<red>Cet article n'est pas à vendre."
+  shop-not-sellable: "<red>La boutique ne rachète pas cet article."
+  shop-no-items: "<red>Tu n'as pas cet objet sur toi."
+  inventory-full: "<red>Ton inventaire est plein."
+
+  home-set: "Home <yellow><name><gray> défini."
+  home-deleted: "Home <yellow><name><gray> supprimé."
+  home-not-found: "<red>Home introuvable : <white><name>"
+  home-limit: "<red>Limite de homes atteinte (<max>). Monte en niveau ou en grade !"
+  home-invalid-name: "<red>Nom invalide (1 à 16 caractères : lettres, chiffres, - et _)."
+
+  spawn-set: "Spawn défini ici."
+  teleport-warmup: "Téléportation dans <yellow><seconds>s<gray>... ne bouge pas !"
+  teleport-done: "<green>Téléporté : <white><target>"
+  teleport-cancelled: "<red>Téléportation annulée."
+
+  level-info: "Niveau <green><level> <dark_gray>| <yellow><xp><gray>/<yellow><needed> XP <bar>"
+  level-info-max: "Niveau <green><level> <gold>(maximum)"
+  level-up-title: "<gold><bold>NIVEAU SUPÉRIEUR !"
+  level-up-subtitle: "<yellow>Tu es maintenant niveau <green><level>"
+  level-up-reward: "<green>Niveau <level> atteint ! Récompense : <gold><amount>"
+  level-up-broadcast: "<gold><player> <gray>vient d'atteindre le niveau <green><level><gray> !"
+
+  quest-complete: "<green>Quête terminée : <quest> <gray>(+<gold><money><gray>, +<aqua><xp> XP<gray>)"
+
+  tag-equipped: "Tag équipé : <tag>"
+  tag-removed: "Tag retiré."
+  tag-bought: "Tag acheté pour <gold><price><gray> : <tag>"
+  tag-locked: "<red>Ce tag est réservé."
+
+  rank-set: "Grade de <white><player><gray> : <white><rank>"
+  rank-unknown: "<red>Grade inconnu : <white><rank>"
+  rank-list: "Grades disponibles : <white><ranks>"
+
+  link-not-found: "<red>Lien introuvable dans links.yml : <white><link>"
+
+  npc-usage: "<yellow>/npc create <id> <métier> <MENU|COMMAND|LINK> <valeur><newline>/npc name|subtitle <id> <texte><newline>/npc action <id> <type> <valeur><newline>/npc profession|move|remove <id><newline>/npc hologram <id> <texte><newline>/npc list | /npc respawn"
+  npc-created: "PNJ <yellow><id><gray> créé."
+  npc-updated: "PNJ <yellow><id><gray> mis à jour."
+  npc-removed: "PNJ <yellow><id><gray> supprimé."
+  npc-not-found: "<red>PNJ introuvable : <white><id>"
+  npc-exists: "<red>Un PNJ <white><id><red> existe déjà."
+  npc-invalid: "<red>Type d'action invalide (MENU, COMMAND, LINK ou NONE)."
+  npc-invalid-id: "<red>Identifiant invalide (1 à 24 caractères : a-z, 0-9, - et _)."
+  npc-list-header: "<gold><bold>PNJ du serveur"
+  npc-list-line: "<yellow><id> <dark_gray>[<kind>] <gray><action>"
+
+  build-warning: "<yellow>Attention : cela remplace une zone de <red><size>x<size> blocs<yellow> autour de toi (terrain, arbres, constructions) et fait de toi le centre du spawn. Pour continuer : <white>/monserveur buildspawn confirm<yellow>. Pour annuler après coup : <white>/monserveur buildspawn undo"
+  build-start: "<yellow>Construction du spawn en cours (<blocks> blocs)... ne bouge pas trop !"
+  build-done: "<green>Spawn construit ! Les PNJ sont en place. Tu peux tout modifier avec <white>/npc<green> et spawn-build.yml."
+  build-busy: "<red>Une construction est déjà en cours."
+  build-undone: "<green>Construction annulée."
+  build-nothing: "<red>Rien à annuler (l'historique est perdu après un redémarrage)."
+
+  sell-nothing: "<red>Rien à vendre dans ton inventaire."
+  sell-all-done: "<green>Vente de <white><stacks> <gray>pile(s) pour <gold><amount>"
+  sell-custom-item-blocked: "<red>Impossible de vendre un objet personnalisé (nom modifié)."
+
+  ah-listed: "<green>Objet mis en vente pour <gold><price>"
+  ah-sell-prompt: "<yellow>Tape le prix de vente dans le chat (entre <gold><min><yellow> et <gold><max><yellow>), ou <red>annuler<yellow>."
+  ah-sell-cancelled: "<gray>Mise en vente annulée."
+  ah-limit-reached: "<red>Tu as déjà <white><max><red> annonces actives."
+  ah-price-out-of-range: "<red>Prix invalide (entre <white><min><red> et <white><max><red>)."
+  ah-not-found: "<red>Annonce introuvable (déjà vendue ou retirée)."
+  ah-own-listing: "<red>Tu ne peux pas acheter ta propre annonce."
+  ah-bought: "<green>Achat : <white><item> <gray>pour <gold><price>"
+  ah-sold: "<green><player> <gray>a acheté ton annonce : <gold>+<amount>"
+  ah-cancelled: "<gray>Annonce retirée, objet rendu."
+  ah-expired-returned: "<yellow>Ton annonce (<white><item><yellow>) a expiré, objet rendu dans ta boîte de réception."
+  ah-mailbox-full-inventory: "<yellow>Inventaire plein : l'objet est dans ta boîte de réception (/ah mailbox)."
+  ah-mailbox-empty: "<gray>Ta boîte de réception est vide."
+  ah-collected: "<green><amount> objet(s) récupéré(s)."
+
+  tpa-self: "<red>Tu ne peux pas te téléporter à toi-même."
+  tpa-already-pending: "<red><player> <red>a déjà une demande en attente."
+  tpa-sent: "Demande envoyée à <white><player>"
+  tpa-received-to: "<yellow><player> <gray>veut se téléporter à toi. <green>/tpaccept <gray>ou <red>/tpdeny <gray>(<seconds>s)"
+  tpa-received-here: "<yellow><player> <gray>te demande de le/la rejoindre. <green>/tpaccept <gray>ou <red>/tpdeny <gray>(<seconds>s)"
+  tpa-expired: "<gray>La demande envoyée à <white><player> <gray>a expiré."
+  tpa-cancelled: "<gray>Demande annulée."
+  tpa-cancelled-by-sender: "<gray><player> <gray>a annulé sa demande."
+  tpa-nothing-to-cancel: "<red>Aucune demande à annuler."
+  tpa-none-pending: "<red>Aucune demande en attente."
+  tpa-player-left: "<red>Ce joueur s'est déconnecté."
+  tpa-accepted: "<green>Téléportation avec <white><player> <green>acceptée."
+  tpa-accepted-by: "<green><player> <green>a accepté ta demande."
+  tpa-denied: "<red>Demande refusée."
+  tpa-denied-by: "<red><player> <red>a refusé ta demande."
+  back-none: "<red>Aucun endroit où retourner."
