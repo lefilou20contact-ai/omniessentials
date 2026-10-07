@@ -1,4 +1,4 @@
-# MonServeur — plugin tout-en-un pour Paper
+# Omniessentials — plugin tout-en-un pour Paper
 
 Grades, tags, tab/nametag, économie, boutique, menus GUI, niveaux, quêtes
 quotidiennes, homes, spawn, mode lobby, liens/annonces personnalisables,
