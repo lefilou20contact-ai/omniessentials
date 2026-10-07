@@ -5,27 +5,10 @@ quotidiennes, homes, spawn, mode lobby, liens/annonces personnalisables,
 PNJ, générateur de spawn, **téléportation entre joueurs (/tpa), vente rapide
 (/sell) et hôtel des ventes (/ah)**. Réglages dans `config.yml`, `links.yml` et `spawn-build.yml`.
 
-## 1. Compiler le plugin (il faut obtenir le fichier .jar)
-
-Avant de compiler, ouvre `pom.xml` et mets dans `<paper.version>` la version de
-Paper de ton serveur (ex : `1.21.1-R0.1-SNAPSHOT`, `1.21.4-R0.1-SNAPSHOT`).
-Le plugin doit être compilé pour la version que tu utilises sur Minestrator.
-
-**Option A — sans rien installer (GitHub)**
-1. Crée un dépôt GitHub (privé si tu veux) et envoie-y tout ce dossier.
-2. Onglet **Actions** > dernier "Build" > en bas **Artifacts** > télécharge `MonServeur.jar`.
-
-**Option B — sur ton PC**
-1. Installe JDK 21 (https://adoptium.net) et Maven (https://maven.apache.org).
-2. Dans ce dossier : `mvn clean package`
-3. Le fichier est dans `target/MonServeur-1.0.0.jar`.
-
-**Option C — IntelliJ IDEA** : ouvre le dossier, il détecte Maven, puis Maven > Lifecycle > package.
-
-## 2. Installer sur Minestrator
-1. Panel Minestrator : serveur en **Paper** (même version que dans le pom).
+## 2. Installer sur [Mon Serveur]
+1. Panel [mon Serveur] : serveur en **Paper** (même version que dans le pom).
 2. Gestionnaire de fichiers / FTP : dépose le `.jar` dans le dossier `plugins/`.
-3. Redémarre le serveur. `config.yml` est créé dans `plugins/MonServeur/`.
+3. Redémarre le serveur. `config.yml` est créé dans `plugins/monServeur/`.
 4. Donne-toi le grade admin : depuis la console du panel, `op TonPseudo`
    puis en jeu `/rank set TonPseudo admin`.
 
@@ -142,7 +125,6 @@ ou après une mort. Réglable dans `config.yml`, section `teleport`.
 
 ## 6. Bon à savoir
 - Données joueurs : `plugins/MonServeur/players/<uuid>.yml` (sauvegarde auto toutes les 5 min).
-- Pas de lien avec Vault / LuckPerms : l'économie et les grades sont ceux du plugin.
 - Hôtel des ventes : les annonces sont dans `plugins/MonServeur/auctions.yml`, la boîte de
   réception dans `mailbox.yml`. Ne les modifie pas à la main.
 - L'XP des blocs peut être farmée en posant/cassant des blocs ; les quêtes aussi.
