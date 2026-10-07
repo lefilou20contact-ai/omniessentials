@@ -1,134 +1,133 @@
-# Omniessentials — plugin tout-en-un pour Paper
+# Omniessentials — all-in-one plugin for Paper
 
-Grades, tags, tab/nametag, économie, boutique, menus GUI, niveaux, quêtes
-quotidiennes, homes, spawn, mode lobby, liens/annonces personnalisables,
-PNJ, générateur de spawn, **téléportation entre joueurs (/tpa), vente rapide
-(/sell) et hôtel des ventes (/ah)**. Réglages dans `config.yml`, `links.yml` et `spawn-build.yml`.
+Ranks, tags, tab/nametag, economy, shop, GUI menus, levels, daily quests,
+homes, spawn, lobby mode, customizable links/announcements,
+NPCs, spawn generator, player-to-player teleportation (/tpa), quick sell
+(/sell), and auction house (/ah). Settings in `config.yml`, `links.yml` and `spawn-build.yml`.
 
-## 2. Installer sur [Mon Serveur]
-1. Panel [mon Serveur] : serveur en **Paper** (même version que dans le pom).
-2. Gestionnaire de fichiers / FTP : dépose le `.jar` dans le dossier `plugins/`.
-3. Redémarre le serveur. `config.yml` est créé dans `plugins/monServeur/`.
-4. Donne-toi le grade admin : depuis la console du panel, `op TonPseudo`
-   puis en jeu `/rank set TonPseudo admin`.
+## 2. Install on [My Server]
+1. Panel [My Server]: server on **Paper** (same version as in the pom).
+2. File manager / FTP: place the `.jar` in the `plugins/` folder.
+3. Restart the server. `config.yml` is created in `plugins/monServeur/`.
+4. Grant yourself the admin rank: from the panel console, run `op YourUsername`
+   then in-game `/rank set YourUsername admin`.
 
-## 3. Commandes
+## 3. Commands
 
-| Commande | Description | Permission |
+| Command | Description | Permission |
 |---|---|---|
-| `/menu` (ou clic droit sur l'étoile) | Menu principal | tous |
-| `/shop` | Boutique (clic gauche achète, droit vend, Maj = x64 / tout) | tous |
-| `/balance [joueur]`, `/pay <joueur> <montant>`, `/baltop` | Économie | tous |
-| `/eco <give\|take\|set> <joueur> <montant>` | Gérer l'argent | `monserveur.admin` |
-| `/sethome [nom]`, `/home [nom]`, `/delhome <nom>`, `/homes` | Homes | tous |
-| `/spawn` | Retour au spawn | tous |
-| `/setspawn` | Définir le spawn | `monserveur.admin` |
-| `/level` | Niveau et XP | tous |
-| `/quests` | Quêtes du jour | tous |
-| `/tag` | Choisir / acheter un tag | tous |
-| `/rank list`, `/rank set <joueur> <grade>` | Grades | `monserveur.admin` |
-| `/tpa <joueur>`, `/tpahere <joueur>` | Demande de téléportation | tous |
-| `/tpaccept`, `/tpdeny`, `/tpacancel` | Répondre à une demande | tous |
-| `/back` | Retour à la position précédente (avant tp ou mort) | tous |
-| `/sell hand`, `/sell all` | Vente rapide sans ouvrir le menu | tous |
-| `/ah`, `/ah my`, `/ah collect`, `/ah sell <prix>` | Hôtel des ventes entre joueurs | tous |
-| `/monserveur reload` | Recharge config.yml et links.yml | `monserveur.admin` |
-| `/monserveur buildspawn [confirm\|undo]` | Construit le spawn autour de toi / annule | `monserveur.admin` |
-| `/npc ...` | Gère les PNJ et hologrammes | `monserveur.admin` |
-| `/discord` `/youtube` `/store` `/website` `/links` `/rules` `/aide` | Commandes de `links.yml` (modifiables) | tous |
+| `/menu` (or right-click the star) | Main menu | everyone |
+| `/shop` | Shop (left click to buy, right click to sell, Shift = x64 / all) | everyone |
+| `/balance [player]`, `/pay <player> <amount>`, `/baltop` | Economy | everyone |
+| `/eco <give\|take\|set> <player> <amount>` | Manage money | `monserveur.admin` |
+| `/sethome [name]`, `/home [name]`, `/delhome <name>`, `/homes` | Homes | everyone |
+| `/spawn` | Return to spawn | everyone |
+| `/setspawn` | Define the spawn | `monserveur.admin` |
+| `/level` | Level and XP | everyone |
+| `/quests` | Daily quests | everyone |
+| `/tag` | Choose / buy a tag | everyone |
+| `/rank list`, `/rank set <player> <rank>` | Ranks | `monserveur.admin` |
+| `/tpa <player>`, `/tpahere <player>` | Teleport request | everyone |
+| `/tpaccept`, `/tpdeny`, `/tpacancel` | Respond to a request | everyone |
+| `/back` | Return to previous position (before tp or death) | everyone |
+| `/sell hand`, `/sell all` | Quick sale without opening the menu | everyone |
+| `/ah`, `/ah my`, `/ah collect`, `/ah sell <price>` | Player-to-player auction house | everyone |
+| `/monserveur reload` | Reload `config.yml` and `links.yml` | `monserveur.admin` |
+| `/monserveur buildspawn [confirm\|undo]` | Builds the spawn around you / cancels it | `monserveur.admin` |
+| `/npc ...` | Manage NPCs and holograms | `monserveur.admin` |
+| `/discord` `/youtube` `/store` `/website` `/links` `/rules` `/aide` | Commands from `links.yml` (modifiable) | everyone |
 
-Autres permissions : `monserveur.teleport.bypass` (pas de délai de téléportation),
-`monserveur.lobby.bypass` (ignore les protections lobby),
-`monserveur.tag.fondateur` (exemple de tag réservé).
+Additional permissions: `monserveur.teleport.bypass` (ignores teleport delay),
+`monserveur.lobby.bypass` (ignores lobby protections),
+`monserveur.tag.fondateur` (example of a reserved tag).
 
-## 3 bis. Liens, annonces et accueil personnalisables (`links.yml`)
+## 3 bis. Customizable links, announcements and welcome screen (`links.yml`)
 
-Le fichier `plugins/MonServeur/links.yml` est créé au premier démarrage.
-- **`variables`** : mets ici tes liens (Discord, YouTube, boutique, site) et le nom du serveur.
-  Elles s'utilisent partout avec `{discord}`, `{youtube}`, `{server-name}`...
-- **`commands`** : chaque entrée devient une commande (`/discord`, `/rules`...). Ajoute-en autant que tu veux.
-- **`announcements`** : messages automatiques dans le chat, à intervalle régulier.
-- **`welcome`** : titre et messages affichés à chaque connexion.
+The file `plugins/MonServeur/links.yml` is created on first startup.
+- **`variables`**: add your links here (Discord, YouTube, shop, website, server name).
+  They can be used everywhere with `{discord}`, `{youtube}`, `{server-name}`...
+- **`commands`**: each entry becomes a command (`/discord`, `/rules`...). Add as many as you want.
+- **`announcements`**: automatic chat messages at regular intervals.
+- **`welcome`**: title and messages displayed on each connection.
 
-`{server-name}` fonctionne aussi dans l'en-tête du TAB (`config.yml`, section `tab`).
-Après modification : `/monserveur reload` (pas besoin de redémarrer).
+`{server-name}` also works in the TAB header (`config.yml`, `tab` section).
+After editing: `/monserveur reload` (no need to restart).
 
-## 3 ter. PNJ
+## 3 ter. NPCs
 
-Un PNJ est un villageois immobile et invulnérable, avec un texte flottant au-dessus.
-Clic droit (ou gauche) = il exécute son action.
+An NPC is an immobile and invulnerable villager, with floating text above it.
+Right click (or left click) = it executes its action.
 
 ```
-/npc create <id> <métier> <MENU|COMMAND|LINK> <valeur>
-   ex : /npc create marchand toolsmith MENU shop
+/npc create <id> <profession> <MENU|COMMAND|LINK> <value>
+   ex : /npc create merchant toolsmith MENU shop
         /npc create yt butcher LINK youtube
         /npc create hub cleric COMMAND spawn
-/npc name <id> <texte>        (MiniMessage, ex : <gold>Marchand)
-/npc subtitle <id> <texte>    (- pour effacer)
-/npc action <id> <type> <valeur>
-/npc profession <id> <métier>
-/npc move <id>                (le déplace là où tu es)
+/npc name <id> <text>        (MiniMessage, ex : <gold>Merchant)
+/npc subtitle <id> <text>    (- to clear)
+/npc action <id> <type> <value>
+/npc profession <id> <profession>
+/npc move <id>               (moves it to where you are)
 /npc remove <id>   /npc list   /npc respawn
-/npc hologram <id> <texte>    (texte flottant seul, sans PNJ)
+/npc hologram <id> <text>    (floating text alone, without NPC)
 ```
-Menus disponibles : `main`, `shop`, `homes`, `quests`, `tags`. Pour un LINK, la valeur est le
-nom d'une variable de `links.yml`. Les PNJ sont sauvegardés dans `npcs.yml`.
-Limite : ce sont des villageois (pas de skin de joueur, ça demande un plugin externe comme Citizens).
 
-## 3 quater. Générer le spawn
+Available menus: `main`, `shop`, `homes`, `quests`, `tags`. For a LINK, the value is the
+name of a variable from `links.yml`. NPCs are saved in `npcs.yml`.
+Limit: these are villagers (no player skin, this requires an external plugin such as Citizens).
 
-1. Va où tu veux le centre du spawn (sur un terrain à peu près plat).
-2. `/monserveur buildspawn` : affiche l'avertissement et la taille de la zone.
-3. `/monserveur buildspawn confirm` : construit (quelques secondes).
-4. Pas content ? `/monserveur buildspawn undo` (possible tant que le serveur n'a pas redémarré).
+## 3 quater. Generate the spawn
 
-Le spawn contient une place ronde en damier, une fontaine, 4 chemins, 4 portails, 8 lampadaires,
-4 pavillons, 4 cerisiers, un titre flottant, et 7 PNJ (guide, boutique, quêtes, tags, homes, Discord, YouTube).
-Il devient le spawn du monde et du plugin (`/spawn`). Style et PNJ : `spawn-build.yml`.
-**Attention : la zone est remplacée (terrain, arbres, constructions).**
+1. Go where you want the center of the spawn (on a roughly flat area).
+2. `/monserveur buildspawn`: displays the warning and the size of the area.
+3. `/monserveur buildspawn confirm`: builds it (takes a few seconds).
+4. Not happy? `/monserveur buildspawn undo` (possible as long as the server has not restarted).
 
-## 3 quinquies. Téléportation entre joueurs et /back
+The spawn contains a round checkered plaza, a fountain, 4 paths, 4 portals, 8 lamps,
+4 pavilions, 4 cherry trees, a floating title, and 7 NPCs (guide, shop, quests, tags, homes, Discord, YouTube).
+It becomes the spawn of the world and the plugin (`/spawn`). Style and NPCs: `spawn-build.yml`.
+**Warning: the area is replaced (terrain, trees, constructions).**
 
-`/tpa <joueur>` envoie une demande (`/tpaccept` ou `/tpdeny` côté destinataire, expire au
-bout d'une minute par défaut). `/tpahere <joueur>` fait l'inverse : c'est l'autre qui vient
-à toi. `/back` retourne à ta position précédente : avant un `/home`, un `/spawn`, un `/tpa`,
-ou après une mort. Réglable dans `config.yml`, section `teleport`.
+## 3 quinquies. Teleportation between players and /back
 
-## 3 sexies. Vente rapide et hôtel des ventes
+`/tpa <player>` sends a request (`/tpaccept` or `/tpdeny` on the recipient side, expires after
+one minute by default). `/tpahere <player>` does the opposite: the other player comes to you. `/back`
+returns to your previous position: before `/home`, `/spawn`, `/tpa`,
+or after death. Adjustable in `config.yml`, `teleport` section.
 
-- **`/sell hand`** vend l'objet en main, **`/sell all`** vend tout ce qui est vendable dans
-  l'inventaire (mêmes prix que la boutique `/shop`, bonus de grade inclus). Les objets renommés
-  ne se vendent pas (protection contre les objets spéciaux).
-- **`/ah`** ouvre l'hôtel des ventes : les joueurs y vendent leurs objets à d'autres joueurs.
-  Bouton "Vendre" (tiens l'objet en main, le prix est demandé dans le chat) ou `/ah sell <prix>`.
-  `/ah my` : tes annonces, à retirer si besoin. `/ah collect` ou `/ah mailbox` : ta boîte de
-  réception, pour les objets reçus hors-ligne, les annonces expirées ou retirées, ou quand ton
-  inventaire était plein au moment de l'achat.
-- Réglages dans `config.yml`, section `auction` : durée avant retour automatique, nombre
-  d'annonces actives par joueur, commission prélevée à la vente, prix min/max.
+## 3 sexies. Quick sell and auction house
 
-## 4. Utilisation selon le type de serveur
+- **`/sell hand`** sells the item in hand, **`/sell all`** sells everything sellable in
+the inventory (same prices as `/shop`, rank bonus included). Renamed items are not sold
+(protection against special items).
+- **`/ah`** opens the auction house: players sell their items to other players.
+  "Sell" button (hold the item in hand, the price is entered in chat) or `/ah sell <price>`.
+  `/ah my`: your listings, removable if needed. `/ah collect` or `/ah mailbox`: your mailbox,
+  for items received offline, expired listings, or removed items, or when your inventory was full at the time of purchase.
+- Settings in `config.yml`, `auction` section: time before automatic return, number
+  of active listings per player, commission taken on sale, min/max price.
 
-- **Survie / économie** : laisse la config par défaut, ajuste les prix de la boutique.
-- **RPG** : joue sur `levels` (XP, courbe, récompenses) et `quests`.
-- **Lobby / hub** : `lobby.enabled: true`, `spawn.teleport-on-join: true`,
-  fais `/setspawn` là où tu veux accueillir les joueurs.
-- **Minijeux** : le plugin fournit grades, tab, économie, menus et lobby, mais pas
-  de moteur de minijeu (arènes, équipes, manches). Ça se code à part, sur cette base.
+## 4. Usage depending on server type
 
-## 5. Personnaliser
-- Textes : format MiniMessage (https://docs.advntr.dev/minimessage/format.html),
-  couleurs `<red>`, dégradés `<gradient:red:gold>texte</gradient>`, etc.
-- Grades : section `ranks` (préfixe, couleur, nombre de homes, bonus de vente).
-- Boutique : section `shop.categories` (nom de matériau Minecraft en MAJUSCULES).
-- Les menus (icônes, emplacements) sont dans `src/main/java/dev/monserveur/gui/`.
+- **Survival / economy**: leave the default config, adjust shop prices.
+- **RPG**: use `levels` (XP, curve, rewards) and `quests`.
+- **Lobby / hub**: `lobby.enabled: true`, `spawn.teleport-on-join: true`,
+  do `/setspawn` where you want to welcome players.
+- **Minigames**: the plugin provides ranks, tab, economy, menus and lobby, but not
+the minigame engine itself (arenas, teams, rounds). That is coded separately, on this base.
 
-## 6. Bon à savoir
-- Données joueurs : `plugins/MonServeur/players/<uuid>.yml` (sauvegarde auto toutes les 5 min).
-- Hôtel des ventes : les annonces sont dans `plugins/MonServeur/auctions.yml`, la boîte de
-  réception dans `mailbox.yml`. Ne les modifie pas à la main.
-- L'XP des blocs peut être farmée en posant/cassant des blocs ; les quêtes aussi.
-- Boutique : 45 articles max par catégorie, 21 catégories max.
-- Homes : les menus affichent 14 homes max (la commande `/home <nom>` marche pour tous).
-- Mise à jour du plugin : remplace le `.jar` (même nom) serveur éteint. `links.yml` et `spawn-build.yml`
-  sont créés s'ils n'existent pas, mais jamais écrasés ; les nouveaux messages de `config.yml` ont une valeur par défaut.
+## 5. Customize
+- Texts: MiniMessage format (https://docs.advntr.dev/minimessage/format.html),
+  colors like `<red>`, gradients like `<gradient:red:gold>text</gradient>`, etc.
+- Ranks: `ranks` section (prefix, color, number of homes, sale bonus).
+- Shop: `shop.categories` section (Minecraft material name in uppercase).
+- Menus (icons, slots) are in `src/main/java/dev/monserveur/gui/`.
+
+## 6. Good to know
+- Player data: `plugins/MonServeur/players/<uuid>.yml` (auto-saved every 5 minutes).
+- Auction house: listings are in `plugins/MonServeur/auctions.yml`, the mailbox in `mailbox.yml`. Do not edit them manually.
+- Block XP can be farmed by placing/breaking blocks; quests as well.
+- Shop: max 45 items per category, max 21 categories.
+- Homes: menus display max 14 homes (the `/home <name>` command works for all).
+- Updating the plugin: replace the `.jar` (same name) with the server stopped. `links.yml` and `spawn-build.yml`
+  are created if they do not exist, but are never overwritten; new default values in `config.yml` are added automatically.
